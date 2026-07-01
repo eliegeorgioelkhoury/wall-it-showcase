@@ -1,0 +1,32 @@
+# ---- IMPORTANT: presentation only ----
+# This is a PUBLIC repo: landing page + case study + bundled Expo web build.
+# Never commit private Wall it / wallet-app app source here.
+
+# ---- Environment ----
+.env
+.env.*
+
+# ---- Node / static site build ----
+node_modules/
+dist/
+build/
+out/
+.cache/
+.astro/
+.next/
+coverage/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+
+# ---- Cloudflare / deploy ----
+.wrangler/
+
+# ---- IDE / Editor ----
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# ---- OS ----
+.DS_Store
+Thumbs.db
