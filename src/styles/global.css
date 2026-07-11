@@ -1,0 +1,303 @@
+/* =========================================================================
+   Wall it — showcase design system
+   Tokens: Pine · Mint · Ink · Honey · Coin silver
+   Type:   General Sans (display) · Inter (text) — self-hosted, no CDN calls
+   ========================================================================= */
+
+/* ---- Fonts (self-hosted; graceful fallback if a file is absent) ---------- */
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('/fonts/general-sans-700.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter var';
+  src: url('/fonts/inter-variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---- Tokens -------------------------------------------------------------- */
+:root {
+  /* Named palette (from PLAN.md) */
+  --pine: #0f3d3e;
+  --mint: #7fe9c3;
+  --ink: #0b1e1d;
+  --honey: #f2b441;
+  --coin: #c6cfcf;
+
+  /* Derived scale */
+  --pine-950: #071f20;
+  --pine-900: #0a2c2d;
+  --pine-800: #0f3d3e;
+  --pine-700: #14504f;
+  --pine-600: #1c6462;
+  --mint-500: #58dcae;
+  --mint-400: #7fe9c3;
+  --mint-200: #bff3e1;
+  --mint-050: #eafaf3;
+  --honey-500: #f2b441;
+  --honey-300: #f8d089;
+  --paper: #f5f8f6;
+  --paper-warm: #fbfcfa;
+  --coin-400: #c6cfcf;
+  --coin-600: #8b9997;
+
+  /* Semantic (light surfaces) */
+  --bg: var(--paper);
+  --surface: #ffffff;
+  --text: var(--ink);
+  --text-muted: #465957;
+  --text-soft: #405754;
+  --border: #dde6e2;
+  --brand: var(--pine-800);
+  --accent: var(--honey-500);
+
+  /* Type */
+  --font-display: 'General Sans', 'Space Grotesk', ui-rounded, 'Segoe UI',
+    system-ui, sans-serif;
+  --font-text: 'Inter var', 'Inter', system-ui, -apple-system, 'Segoe UI',
+    Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Rhythm */
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.1rem);
+  --step-1: clamp(1.2rem, 1.1rem + 0.5vw, 1.45rem);
+  --step-2: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --step-3: clamp(2rem, 1.6rem + 2vw, 3rem);
+  --step-4: clamp(2.6rem, 1.9rem + 3.4vw, 4.4rem);
+
+  --radius: 16px;
+  --radius-lg: 26px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgba(11, 30, 29, 0.04), 0 10px 30px rgba(11, 30, 29, 0.07);
+  --shadow-lg: 0 30px 60px -20px rgba(7, 31, 32, 0.35);
+  --ring: 0 0 0 3px var(--honey-500), 0 0 0 5px rgba(242, 180, 65, 0.35);
+  --container: 1120px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---- Reset-ish ----------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  font-family: var(--font-text);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'cv05' 1, 'ss01' 1;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: 6px;
+}
+
+/* ---- Layout helpers ------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(1.1rem, 4vw, 2rem);
+}
+.section {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+}
+.eyebrow {
+  font-family: var(--font-text);
+  font-weight: 600;
+  font-size: var(--step--1);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pine-600);
+}
+.eyebrow--on-dark {
+  color: var(--mint-400);
+}
+.lede {
+  font-size: var(--step-1);
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+/* ---- Buttons ------------------------------------------------------------- */
+.btn {
+  --_bg: var(--pine-800);
+  --_fg: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.35rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--step-0);
+  line-height: 1;
+  background: var(--_bg);
+  color: var(--_fg);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition:
+    transform 0.18s var(--ease),
+    box-shadow 0.18s var(--ease),
+    background 0.18s var(--ease),
+    border-color 0.18s var(--ease);
+  will-change: transform;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(7, 31, 32, 0.5);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.btn--honey {
+  --_bg: var(--honey-500);
+  --_fg: var(--ink);
+}
+.btn--ghost {
+  --_bg: transparent;
+  --_fg: var(--ink);
+  border-color: var(--border);
+}
+.btn--ghost:hover {
+  border-color: var(--pine-600);
+  background: var(--mint-050);
+}
+.btn--on-dark.btn--ghost {
+  --_fg: #eef6f2;
+  border-color: rgba(198, 207, 207, 0.35);
+}
+.btn--on-dark.btn--ghost:hover {
+  border-color: var(--mint-400);
+  background: rgba(127, 233, 195, 0.08);
+}
+
+/* ---- Cards & chips ------------------------------------------------------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 3vw, 2rem);
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.22s var(--ease),
+    box-shadow 0.22s var(--ease),
+    border-color 0.22s var(--ease);
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--mint-400);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: var(--step--1);
+  font-weight: 500;
+  background: var(--mint-050);
+  color: var(--pine-700);
+  border: 1px solid var(--mint-200);
+}
+.chip--on-dark {
+  background: rgba(127, 233, 195, 0.1);
+  color: var(--mint-200);
+  border-color: rgba(127, 233, 195, 0.22);
+}
+
+/* ---- Scroll reveal ------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Motion & a11y preferences ------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ---- Visually hidden (for screen-reader labels) -------------------------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

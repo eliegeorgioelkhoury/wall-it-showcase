@@ -1,0 +1,614 @@
+---
+import Base from '../layouts/Base.astro';
+import DataOrbit from '../components/DataOrbit.astro';
+
+const REPO = 'https://github.com/eliegeorgioelkhoury/wall-it-showcase';
+const CASE_STUDY = `${REPO}#how-it-works`;
+const DEMO_URL = '/demo/'; // set to the live demo path/subdomain at hosting time
+
+const pillars = [
+  {
+    tag: 'Data',
+    title: 'Local-first data model',
+    body: 'The device is the single source of truth. Every read and write hits an on-device SQLite database — instant, offline, no server round-trip for your financial data.',
+    anchor: 'local-first-data-model',
+  },
+  {
+    tag: 'Budgets',
+    title: 'Rule-based budgeting engine',
+    body: 'Deterministic rules split take-home money across needs, wants, and savings, then classify and roll transactions into budgets — predictable and explainable, never a black box.',
+    anchor: 'rule-based-budgeting-engine',
+  },
+  {
+    tag: 'Streaks',
+    title: 'Append-only achievements',
+    body: 'Earned badges are appended, never mutated or deleted. Current state is derived by folding the log — an auditable history you can replay, and a conflict-free shape for sync.',
+    anchor: 'append-only-achievements-store',
+  },
+  {
+    tag: 'Premium',
+    title: 'One entitlement, one source',
+    body: 'A single authoritative check decides premium; every gate and the whole UI derive from it. Swapping the dev switch for real billing touches exactly one function — nothing else.',
+    anchor: 'single-source-of-truth-premium-entitlement',
+  },
+];
+
+const features = [
+  { icon: 'rollover', title: 'Budgets with rollover', body: 'Weekly, monthly, or yearly envelopes. Surplus and overspend carry forward — full envelope behavior, computed lazily on read.' },
+  { icon: 'globe', title: 'Multi-currency', body: 'Accounts in any currency. Money is stored as integer minor units — never floats — and totals convert with explicit, dated rates.' },
+  { icon: 'calendar', title: 'Planned payments', body: 'Recurring bills with reminders and optional auto-post. Local notifications, no push server required.' },
+  { icon: 'chart', title: 'Stats & insights', body: 'Top expenses, cash flow, spending breakdowns, and 12-month trends — all charted from on-device data.' },
+  { icon: 'lock', title: 'Biometric lock', body: 'Face ID / fingerprint unlock with a passcode fallback. The passcode hash lives in the device keychain.' },
+  { icon: 'award', title: 'Milestones', body: 'Savings streaks and habit badges that reward consistency — earned locally, kept forever.' },
+];
+
+const nevers = [
+  'No account to create — open the app and start.',
+  'No cloud sync of your financial data by default.',
+  'No third-party analytics watching your money.',
+  'No ad networks, no data brokers, no tracking pixels.',
+];
+
+const S =
+  'width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+const icons: Record<string, string> = {
+  rollover: `<svg ${S}><path d="M3.5 12a8.5 8.5 0 1 1 2.4 5.9"/><path d="M3.5 21v-4.2h4.2"/></svg>`,
+  globe: `<svg ${S}><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4" ry="9"/></svg>`,
+  calendar: `<svg ${S}><rect x="3.5" y="5" width="17" height="16" rx="3"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg>`,
+  chart: `<svg ${S}><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>`,
+  lock: `<svg ${S}><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>`,
+  award: `<svg ${S}><circle cx="12" cy="9" r="6"/><path d="M9 14.4L8 21l4-2 4 2-1-6.6"/></svg>`,
+};
+const icon = (name: string): string => icons[name] ?? '';
+---
+
+<Base>
+  <!-- ===================== Header ===================== -->
+  <header class="site-header" data-header>
+    <div class="container header-row">
+      <a class="brand" href="#top" aria-label="Wall it — home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">Wall it</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href={CASE_STUDY}>Case study</a>
+        <a href="#privacy">Privacy</a>
+      </nav>
+      <a class="btn btn--honey header-cta" href={DEMO_URL}>Try the demo</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ===================== Hero ===================== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow eyebrow--on-dark" data-reveal>Local-first personal finance</p>
+          <h1 class="hero-title" data-reveal style="--reveal-delay: 60ms">
+            Your money data <span class="accent">never leaves</span> your device.
+          </h1>
+          <p class="hero-lede" data-reveal style="--reveal-delay: 120ms">
+            Wall it tracks accounts, budgets, and transactions in a database that
+            lives on your phone — not on someone else's server. Privacy by
+            architecture, not by policy.
+          </p>
+          <div class="hero-cta" data-reveal style="--reveal-delay: 180ms">
+            <a class="btn btn--honey" href={DEMO_URL}>
+              Try the web demo
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn--ghost btn--on-dark" href={CASE_STUDY}>Read the case study</a>
+          </div>
+          <ul class="trust" data-reveal style="--reveal-delay: 240ms">
+            <li>No account</li>
+            <li>Offline-always</li>
+            <li>No cloud sync</li>
+          </ul>
+        </div>
+        <div class="hero-art" data-reveal style="--reveal-delay: 120ms">
+          <DataOrbit />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Thesis band ===================== -->
+    <section class="band">
+      <div class="container band-inner" data-reveal>
+        <p class="band-text">
+          Most finance apps upload every transaction to their servers.
+          <strong>Wall it keeps them on your device</strong> — an on-device SQLite
+          database is the single source of truth, so the app works fully offline
+          and your spending is nobody's data set but yours.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== Pillars / How it works ===================== -->
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">How it works</p>
+          <h2 class="section-title">Four architectural decisions</h2>
+          <p class="lede">
+            The case study goes deep on each — prose and diagrams, no proprietary
+            code. Here's the shape of it.
+          </p>
+        </div>
+        <div class="pillars">
+          {
+            pillars.map((p, i) => (
+              <a
+                class="card pillar"
+                href={`${REPO}#${p.anchor}`}
+                data-reveal
+                style={`--reveal-delay: ${i * 80}ms`}
+              >
+                <span class="pillar-tag">{p.tag}</span>
+                <h3 class="pillar-title">{p.title}</h3>
+                <p class="pillar-body">{p.body}</p>
+                <span class="pillar-link">
+                  Read more
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Feature grid ===================== -->
+    <section class="section section--soft">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">In the app</p>
+          <h2 class="section-title">Real budgeting, fully offline</h2>
+        </div>
+        <div class="features">
+          {
+            features.map((f, i) => (
+              <div class="feature" data-reveal style={`--reveal-delay: ${(i % 3) * 70}ms`}>
+                <span class="feature-icon" aria-hidden="true" set:html={icon(f.icon)} />
+                <h3 class="feature-title">{f.title}</h3>
+                <p class="feature-body">{f.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Privacy panel ===================== -->
+    <section class="privacy" id="privacy">
+      <div class="container privacy-grid">
+        <div class="privacy-copy" data-reveal>
+          <p class="eyebrow eyebrow--on-dark">Privacy by architecture</p>
+          <h2 class="privacy-title">What Wall it never does</h2>
+          <p class="privacy-lede">
+            These aren't promises in a policy you have to trust. They're
+            consequences of where the data lives — on your device, in a local
+            database the app reads and writes directly.
+          </p>
+          <a class="btn btn--honey" href={CASE_STUDY}>See the data model</a>
+        </div>
+        <ul class="nevers" data-reveal style="--reveal-delay: 100ms">
+          {
+            nevers.map((n) => (
+              <li>
+                <svg class="x" width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+                <span>{n}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== Demo CTA ===================== -->
+    <section class="section demo" id="demo">
+      <div class="container demo-inner" data-reveal>
+        <p class="eyebrow">See it run</p>
+        <h2 class="section-title">The whole app, in your browser</h2>
+        <p class="lede demo-lede">
+          A web build of Wall it, exported from the same React Native codebase.
+          It runs entirely client-side — the demo's data stays in your browser,
+          exactly like the app keeps yours on your phone.
+        </p>
+        <div class="demo-cta">
+          <a class="btn btn--honey" href={DEMO_URL}>Launch the web demo</a>
+          <span class="demo-note">Runs on-device · no sign-up · nothing uploaded</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="#top" aria-label="Wall it — home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">Wall it</span>
+        </a>
+        <p class="footer-tag">Local-first personal finance. Your data never leaves your device.</p>
+      </div>
+      <nav class="footer-links" aria-label="Footer">
+        <a href="#how">How it works</a>
+        <a href={CASE_STUDY}>Case study</a>
+        <a href={DEMO_URL}>Web demo</a>
+        <a href="#">On the App Store — soon</a>
+      </nav>
+    </div>
+    <div class="container footer-base">
+      <span>© 2026 Elie El Khoury</span>
+      <span>Landing &amp; showcase code: MIT · The app source is private.</span>
+    </div>
+  </footer>
+</Base>
+
+<style>
+  /* ---------- Header ---------- */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(10, 44, 45, 0.72);
+    backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .site-header.is-stuck {
+    border-bottom-color: rgba(127, 233, 195, 0.16);
+    background: rgba(8, 34, 35, 0.9);
+  }
+  .header-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 68px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #eef6f2;
+  }
+  .brand-mark {
+    width: 22px;
+    height: 22px;
+    border-radius: 7px;
+    background: linear-gradient(145deg, var(--mint-400), var(--honey-500));
+    box-shadow: inset 0 0 0 3px rgba(10, 44, 45, 0.55);
+  }
+  .nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: auto;
+    font-size: var(--step--1);
+    font-weight: 500;
+  }
+  .nav a {
+    color: #cfe0d9;
+    transition: color 0.15s ease;
+  }
+  .nav a:hover {
+    color: var(--mint-400);
+  }
+  .header-cta {
+    padding: 0.6rem 1.05rem;
+    font-size: var(--step--1);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background:
+      radial-gradient(120% 90% at 78% 8%, #12403f 0%, transparent 55%),
+      linear-gradient(180deg, #0a2c2d 0%, #071f20 100%);
+    color: #eef6f2;
+    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(3.5rem, 8vw, 6rem);
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .hero-title {
+    font-size: var(--step-4);
+    font-weight: 700;
+    color: #f4faf7;
+    margin-top: 1rem;
+    letter-spacing: -0.03em;
+  }
+  .hero-title .accent {
+    color: var(--mint-400);
+  }
+  .hero-lede {
+    font-size: var(--step-1);
+    color: #bcd2ca;
+    margin-top: 1.25rem;
+    max-width: 34ch;
+    line-height: 1.5;
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 1.9rem;
+  }
+  .trust {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.4rem;
+    margin-top: 1.9rem;
+    font-size: var(--step--1);
+    color: #9fbcb2;
+  }
+  .trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .trust li::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--mint-400);
+  }
+  .hero-art {
+    position: relative;
+  }
+
+  /* ---------- Thesis band ---------- */
+  .band {
+    background: var(--pine-800);
+    color: #eef6f2;
+  }
+  .band-inner {
+    padding-block: clamp(2.2rem, 5vw, 3.2rem);
+  }
+  .band-text {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--step-2);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    max-width: 40ch;
+    color: #dcebe4;
+  }
+  .band-text strong {
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ---------- Section heads ---------- */
+  .section-head {
+    max-width: 44ch;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .section-title {
+    font-size: var(--step-3);
+    margin-top: 0.6rem;
+  }
+  .section-head .lede {
+    margin-top: 0.9rem;
+  }
+  .section--soft {
+    background: var(--paper-warm);
+    border-block: 1px solid var(--border);
+  }
+
+  /* ---------- Pillars ---------- */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.1rem;
+  }
+  .pillar {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+  }
+  .pillar-tag {
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pine-600);
+    background: var(--mint-050);
+    border: 1px solid var(--mint-200);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+  }
+  .pillar-title {
+    font-size: var(--step-1);
+    margin-top: 1rem;
+  }
+  .pillar-body {
+    color: var(--text-soft);
+    margin-top: 0.6rem;
+    font-size: var(--step-0);
+  }
+  .pillar-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.1rem;
+    font-weight: 600;
+    font-size: var(--step--1);
+    color: var(--pine-700);
+  }
+  .pillar-link svg {
+    transition: transform 0.18s var(--ease);
+  }
+  .pillar:hover .pillar-link svg {
+    transform: translateX(3px);
+  }
+
+  /* ---------- Features ---------- */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem 1.9rem;
+  }
+  .feature-icon {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--mint-050);
+    color: var(--pine-700);
+    border: 1px solid var(--mint-200);
+  }
+  .feature-title {
+    font-size: var(--step-1);
+    margin-top: 0.9rem;
+  }
+  .feature-body {
+    color: var(--text-soft);
+    margin-top: 0.4rem;
+    font-size: var(--step-0);
+  }
+
+  /* ---------- Privacy ---------- */
+  .privacy {
+    background: linear-gradient(180deg, #071f20, #0a2c2d);
+    color: #eef6f2;
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .privacy-title {
+    color: #f4faf7;
+    font-size: var(--step-3);
+    margin-top: 0.6rem;
+  }
+  .privacy-lede {
+    color: #bcd2ca;
+    margin-top: 1rem;
+    margin-bottom: 1.8rem;
+    max-width: 42ch;
+  }
+  .nevers {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .nevers li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem 1.2rem;
+    background: rgba(127, 233, 195, 0.06);
+    border: 1px solid rgba(127, 233, 195, 0.16);
+    border-radius: var(--radius);
+    font-size: var(--step-0);
+    color: #d7e7e0;
+  }
+  .nevers .x {
+    flex: none;
+    color: var(--honey-500);
+    margin-top: 1px;
+  }
+
+  /* ---------- Demo ---------- */
+  .demo-inner {
+    max-width: 52ch;
+  }
+  .demo-lede {
+    margin-top: 0.9rem;
+  }
+  .demo-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.3rem;
+    margin-top: 1.8rem;
+  }
+  .demo-note {
+    font-size: var(--step--1);
+    color: var(--coin-600);
+  }
+
+  /* ---------- Footer ---------- */
+  .site-footer {
+    background: var(--ink);
+    color: #b9c8c3;
+    padding-block: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  .site-footer .brand-name {
+    color: #eef6f2;
+  }
+  .footer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
+    justify-content: space-between;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid rgba(198, 207, 207, 0.14);
+  }
+  .footer-tag {
+    margin-top: 0.8rem;
+    max-width: 34ch;
+    font-size: var(--step--1);
+  }
+  .footer-links {
+    display: grid;
+    gap: 0.7rem;
+    font-size: var(--step--1);
+    align-content: start;
+  }
+  .footer-links a:hover {
+    color: var(--mint-400);
+  }
+  .footer-base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    font-size: var(--step--1);
+    color: var(--coin-600);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    .hero-grid,
+    .privacy-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-art {
+      order: -1;
+      max-width: 380px;
+      margin-inline: auto;
+    }
+    .features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 620px) {
+    .nav {
+      display: none;
+    }
+    .pillars,
+    .features {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

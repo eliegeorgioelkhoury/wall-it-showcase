@@ -1,0 +1,183 @@
+---
+// Signature motion: on-device data-orbit. Data tokens circle the phone and stay
+// inside the device boundary; the cloud outside is severed. Only the tokens move
+// (the dashed tracks are static). prefers-reduced-motion freezes it to a clean
+// resting composition (handled globally in global.css).
+---
+
+<div class="orbit" role="img" aria-label="A phone at the centre with data points circling it inside a device boundary. Outside the boundary, a cloud is crossed out — the data never leaves the device.">
+  <svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="glow" cx="50%" cy="46%" r="52%">
+        <stop offset="0%" stop-color="#7fe9c3" stop-opacity="0.55" />
+        <stop offset="55%" stop-color="#1c6462" stop-opacity="0.18" />
+        <stop offset="100%" stop-color="#0a2c2d" stop-opacity="0" />
+      </radialGradient>
+      <linearGradient id="phone" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#123f40" />
+        <stop offset="100%" stop-color="#0a2c2d" />
+      </linearGradient>
+      <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#eafaf3" />
+        <stop offset="100%" stop-color="#c6efe0" />
+      </linearGradient>
+    </defs>
+
+    <!-- glow -->
+    <circle class="glow" cx="240" cy="222" r="180" fill="url(#glow)" />
+
+    <!-- device boundary: data stays inside this -->
+    <circle cx="240" cy="240" r="216" fill="none" stroke="#7fe9c3" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="2 7" />
+
+    <!-- static orbit tracks -->
+    <circle cx="240" cy="240" r="150" fill="none" stroke="#7fe9c3" stroke-opacity="0.28" stroke-width="1.4" stroke-dasharray="4 9" />
+    <circle cx="240" cy="240" r="200" fill="none" stroke="#c6cfcf" stroke-opacity="0.22" stroke-width="1.4" stroke-dasharray="4 9" />
+
+    <!-- severed cloud (outside the boundary) -->
+    <g class="no-cloud" transform="translate(398 70)" opacity="0.5">
+      <path d="M6 20 a10 10 0 0 1 2 -19 a13 13 0 0 1 24 4 a9 9 0 0 1 1 15 z" fill="none" stroke="#c6cfcf" stroke-width="2" stroke-linejoin="round" />
+      <line x1="-2" y1="26" x2="38" y2="-4" stroke="#f2b441" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+
+    <!-- phone -->
+    <g class="phone">
+      <rect x="188" y="132" width="104" height="212" rx="24" fill="url(#phone)" stroke="#7fe9c3" stroke-opacity="0.35" stroke-width="1.5" />
+      <rect x="196" y="144" width="88" height="188" rx="16" fill="url(#screen)" />
+      <!-- screen content -->
+      <rect x="208" y="158" width="30" height="5" rx="2.5" fill="#1c6462" opacity="0.55" />
+      <text x="208" y="188" font-family="'General Sans', sans-serif" font-size="21" font-weight="700" fill="#0b1e1d">$4,820</text>
+      <!-- budget rings -->
+      <circle cx="216" cy="214" r="11" fill="none" stroke="#c6cfcf" stroke-opacity="0.6" stroke-width="4" />
+      <circle cx="216" cy="214" r="11" fill="none" stroke="#0f3d3e" stroke-width="4" stroke-dasharray="52 100" stroke-linecap="round" transform="rotate(-90 216 214)" />
+      <circle cx="244" cy="214" r="11" fill="none" stroke="#c6cfcf" stroke-opacity="0.6" stroke-width="4" />
+      <circle cx="244" cy="214" r="11" fill="none" stroke="#f2b441" stroke-width="4" stroke-dasharray="40 100" stroke-linecap="round" transform="rotate(-90 244 214)" />
+      <circle cx="272" cy="214" r="11" fill="none" stroke="#c6cfcf" stroke-opacity="0.6" stroke-width="4" />
+      <circle cx="272" cy="214" r="11" fill="none" stroke="#1c6462" stroke-width="4" stroke-dasharray="66 100" stroke-linecap="round" transform="rotate(-90 272 214)" />
+      <!-- mini bars -->
+      <rect x="208" y="250" width="64" height="7" rx="3.5" fill="#0f3d3e" opacity="0.14" />
+      <rect x="208" y="250" width="44" height="7" rx="3.5" fill="#0f3d3e" />
+      <rect x="208" y="266" width="64" height="7" rx="3.5" fill="#0f3d3e" opacity="0.14" />
+      <rect x="208" y="266" width="30" height="7" rx="3.5" fill="#f2b441" />
+      <rect x="208" y="282" width="64" height="7" rx="3.5" fill="#0f3d3e" opacity="0.14" />
+      <rect x="208" y="282" width="54" height="7" rx="3.5" fill="#1c6462" />
+      <!-- lock glyph: on-device / private -->
+      <rect x="228" y="304" width="24" height="16" rx="4" fill="#0f3d3e" />
+      <path d="M232 304 v-4 a8 8 0 0 1 16 0 v4" fill="none" stroke="#0f3d3e" stroke-width="2.4" />
+      <circle cx="240" cy="312" r="2.4" fill="#7fe9c3" />
+    </g>
+
+    <!-- orbiting tokens: inner ring (clockwise) -->
+    <g class="ring ring-a">
+      <g class="tok" transform="translate(369.9 165)"><circle r="13" fill="#f2b441" /><circle r="13" fill="none" stroke="#0b1e1d" stroke-opacity="0.12" stroke-width="1.5" /><circle r="4.5" fill="none" stroke="#0b1e1d" stroke-opacity="0.35" stroke-width="1.6" /></g>
+      <g class="tok" transform="translate(165 110.1)"><rect x="-13" y="-9" width="26" height="18" rx="6" fill="#ffffff" stroke="#7fe9c3" stroke-width="1.6" /><circle cx="-5" r="3" fill="#0f3d3e" /><rect x="0" y="-2.5" width="9" height="2.5" rx="1.25" fill="#0f3d3e" opacity="0.5" /></g>
+      <g class="tok" transform="translate(110.1 315)"><circle r="10" fill="#7fe9c3" /><circle r="4" fill="#0a2c2d" /></g>
+      <g class="tok" transform="translate(315 369.9)"><circle r="12" fill="#f2b441" /><circle r="4.5" fill="none" stroke="#0b1e1d" stroke-opacity="0.35" stroke-width="1.6" /></g>
+    </g>
+
+    <!-- orbiting tokens: outer ring (counter-clockwise) -->
+    <g class="ring ring-b">
+      <g class="tok" transform="translate(308.4 52)"><circle r="9" fill="#1c6462" /><circle r="3.3" fill="#7fe9c3" /></g>
+      <g class="tok" transform="translate(43 274.7)"><rect x="-12" y="-8" width="24" height="16" rx="5.5" fill="#ffffff" stroke="#c6cfcf" stroke-width="1.6" /><circle cx="-4.5" r="2.7" fill="#f2b441" /><rect x="0" y="-2" width="8" height="2.2" rx="1.1" fill="#0f3d3e" opacity="0.45" /></g>
+      <g class="tok" transform="translate(368.6 393.2)"><circle r="8.5" fill="#7fe9c3" /><circle r="3.2" fill="#0a2c2d" /></g>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .orbit {
+    width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
+    filter: drop-shadow(0 30px 50px rgba(7, 31, 32, 0.4));
+  }
+  .orbit svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .ring {
+    transform-box: view-box;
+    transform-origin: 240px 240px;
+  }
+  .ring-a {
+    animation: orbit-cw 34s linear infinite;
+  }
+  .ring-b {
+    animation: orbit-ccw 48s linear infinite;
+  }
+  /* Keep each token upright while its ring rotates. */
+  .ring-a .tok {
+    animation: spin-ccw 34s linear infinite;
+  }
+  .ring-b .tok {
+    animation: spin-cw 48s linear infinite;
+  }
+  .tok {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+
+  .glow {
+    transform-box: view-box;
+    transform-origin: 240px 222px;
+    animation: breathe 7s ease-in-out infinite;
+  }
+  .phone {
+    transform-box: view-box;
+    transform-origin: 240px 240px;
+    animation: float 9s ease-in-out infinite;
+  }
+
+  @keyframes orbit-cw {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes orbit-ccw {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+  @keyframes spin-ccw {
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+  @keyframes spin-cw {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes breathe {
+    0%,
+    100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ring-a,
+    .ring-b,
+    .ring-a .tok,
+    .ring-b .tok,
+    .glow,
+    .phone {
+      animation: none !important;
+    }
+  }
+</style>
