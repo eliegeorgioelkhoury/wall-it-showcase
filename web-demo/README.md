@@ -1,40 +1,55 @@
-# web-demo/ — bundled Expo web export
+# web-demo/ — status: deferred
 
-This directory holds the **compiled web build** of Wall it (the output of
-`expo export --platform web`). It is a **build artifact only** — no application
-source lives here, and nothing here is hand-written.
+This directory is the slot for a **compiled web build** of Wall it (the output of
+`expo export --platform web`). No application source lives here, and nothing
+here is hand-written.
 
-> Status: **slot prepared.** The bundle is generated from the private app and
-> dropped in here. See the notes below for how it's produced and hosted.
+> **Current status: deferred.** A web build was produced and sanitized, but the
+> app does not *run* in a browser without web-specific adaptation of the private
+> app (which is intentionally not modified). The landing page's "Try the web
+> demo" links resolve to a holding page at [`/demo/`](../public/demo/index.html)
+> until a running build exists.
 
-## How the bundle is produced
+## What was tried
 
-From the private `wallet-app` repo, the web build is exported and copied here —
-**source-maps stripped**, so no source is exposed:
+The export was built from a **throwaway copy** of the private `wallet-app` — the
+original repo was never modified (verified: same HEAD, clean tree before and
+after). Only web-build config was changed *in the copy*:
 
-```sh
-# in the private app (produces a static web bundle; no source is published)
-npx expo export --platform web --output-dir dist-web
+1. `metro.config.js` — added `wasm` to `assetExts` (so `expo-sqlite`'s
+   `wa-sqlite.wasm` resolves).
+2. `app.json` — `web.output: "single"` (SPA, so SQLite isn't run during Node
+   static rendering) + `experiments.baseUrl: "/demo/"`.
+3. A **keyless `.env`** so no `EXPO_PUBLIC_*` third-party keys are inlined.
 
-# then copy ONLY the compiled output into this folder, without any *.map files
-```
+**Result:** the export succeeds and the bundle is clean — verified **no
+source-maps, no `.ts`/`.tsx` source, no `.env`, and no API-key values** (the app
+simply shows "add a key" states for the optional Finnhub / Logo.dev features).
 
-Two things the private app needs for a clean web export (kept in the private
-repo, never here):
+## Why it's deferred
 
-1. **`wasm` asset resolution** — `expo-sqlite`'s web backend loads a
-   `wa-sqlite.wasm` asset, so `wasm` must be in Metro's `assetExts` and the web
-   build served with the cross-origin isolation headers SQLite/OPFS needs.
-2. **A demo-only `.env`** — the export inlines `EXPO_PUBLIC_*` values into the
-   bundle, so the demo is built with a `.env` that contains **no third-party API
-   keys** (a public bundle must not carry private keys).
+The app boots in the browser but renders **blank**, because it is **local-first
+on SQLite** and that layer doesn't come up on the web without adaptation:
 
-## Hosting
+1. **Cross-origin isolation.** `expo-sqlite`'s WASM backend needs
+   `SharedArrayBuffer`, which requires `Cross-Origin-Opener-Policy: same-origin`
+   + `Cross-Origin-Embedder-Policy: require-corp`. This part is a **hosting**
+   fix (a `_headers` rule scoped to `/demo/*`), and it was confirmed to enable
+   isolation.
+2. **The DB/init gate still hangs.** Even with isolation enabled, the on-device
+   database / migration step doesn't complete on web, so the app never leaves
+   its loading state. Resolving this needs **web-specific shims inside the app**
+   (the SQLite init path, plus native-only modules like `expo-secure-store`,
+   `expo-local-authentication`, notifications, and location) — i.e. changes to
+   the private source, which is out of scope here.
 
-Served as static files. Because the export uses absolute asset paths, host the
-bundle at a **root** (its own Cloudflare Pages project or a subdomain) and point
-the landing page's "Try the web demo" links at that URL. Until then, those links
-resolve to the holding page at [`/demo/`](../public/demo/index.html).
+## To finish it later (in the private app)
+
+1. Make expo-web actually run: the two config changes above, web fallbacks for
+   the native-only modules, and a web-capable SQLite init path.
+2. Export `--platform web` with a keyless demo `.env`; **strip all `*.map`
+   files**; copy only the compiled output here (or serve it at its own root).
+3. Serve `/demo/*` with the cross-origin isolation headers above.
 
 ## What must never land here
 

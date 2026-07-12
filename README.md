@@ -12,7 +12,10 @@ This is the **public** presentation for Wall it: a marketing landing page, this
 prose-and-diagrams case study, and a bundled web build of the app. **The app
 source stays private** — only the write-up and the compiled web demo are public.
 
-- 🔗 **Web demo** — _prepared; link goes here once hosting is wired_ (Cloudflare Pages)
+- 🔗 **Web demo** — _pending._ The app compiles to the web, but its on-device
+  SQLite (`expo-sqlite` → WASM) needs cross-origin isolation **and** further
+  web adaptation to run in a browser; rather than ship a broken demo, a live
+  build is deferred. Details in [`web-demo/`](web-demo/README.md).
 - 📱 **On the App Store** — _coming soon_
 
 ---
@@ -251,9 +254,10 @@ flowchart LR
   thesis is "your data never leaves your device," with a signature on-device
   **data-orbit** animation and gentle scroll reveals, all honouring
   `prefers-reduced-motion`.
-- **Web demo** — the app compiled to the web via `expo export --platform web`,
-  served as a static bundle (`web-demo/`). Build artifact only; the source stays
-  private.
+- **Web demo** — _deferred._ The app exports to a static web bundle via
+  `expo export --platform web`, but it relies on on-device SQLite, which needs
+  browser cross-origin isolation and web-specific shims to actually run. See
+  [`web-demo/`](web-demo/README.md) for the full findings.
 - **Case study** — this document.
 
 ## Design
