@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 580" role="img" aria-label="Wall it — Home screen">
+  <rect x="6" y="6" width="268" height="568" rx="38" fill="#0a2c2d"/>
+  <rect x="14" y="14" width="252" height="552" rx="31" fill="#f5f8f6"/>
+  <rect x="116" y="24" width="48" height="7" rx="3.5" fill="#0a2c2d" opacity="0.22"/>
+  <text x="34" y="66" font-family="Inter, sans-serif" font-size="10.5" letter-spacing="1.2" fill="#8b9997">GOOD EVENING</text>
+  <text x="34" y="87" font-family="'General Sans', system-ui, sans-serif" font-size="19" font-weight="600" fill="#0b1e1d">July overview</text>
+  <!-- net worth card -->
+  <rect x="34" y="100" width="212" height="94" rx="18" fill="#0f3d3e"/>
+  <text x="50" y="126" font-family="Inter, sans-serif" font-size="11" fill="#7fe9c3">Net worth</text>
+  <text x="50" y="157" font-family="'General Sans', system-ui, sans-serif" font-size="27" font-weight="700" fill="#f4faf7">$12,480</text>
+  <text x="50" y="178" font-family="Inter, sans-serif" font-size="11" fill="#8fe3c4">▲ 2.4% this month</text>
+  <!-- income / spent -->
+  <rect x="34" y="206" width="101" height="64" rx="14" fill="#ffffff" stroke="#dde6e2"/>
+  <text x="48" y="230" font-family="Inter, sans-serif" font-size="10" fill="#8b9997">Income</text>
+  <text x="48" y="252" font-family="'General Sans', system-ui, sans-serif" font-size="16" font-weight="600" fill="#0f3d3e">$4,820</text>
+  <rect x="145" y="206" width="101" height="64" rx="14" fill="#ffffff" stroke="#dde6e2"/>
+  <text x="159" y="230" font-family="Inter, sans-serif" font-size="10" fill="#8b9997">Spent</text>
+  <text x="159" y="252" font-family="'General Sans', system-ui, sans-serif" font-size="16" font-weight="600" fill="#f2b441">$2,340</text>
+  <!-- recent -->
+  <text x="34" y="300" font-family="'General Sans', system-ui, sans-serif" font-size="13" font-weight="600" fill="#0b1e1d">Recent</text>
+  <g font-family="Inter, sans-serif" font-size="12">
+    <circle cx="44" cy="322" r="11" fill="#eafaf3"/><path d="M39 322h10M44 317v10" stroke="#0f3d3e" stroke-width="1.6"/>
+    <text x="64" y="326" fill="#0b1e1d">Groceries</text><text x="246" y="326" text-anchor="end" fill="#0b1e1d">-$64</text>
+    <circle cx="44" cy="356" r="11" fill="#eafaf3"/><circle cx="44" cy="356" r="4" fill="#58dcae"/>
+    <text x="64" y="360" fill="#0b1e1d">Salary</text><text x="246" y="360" text-anchor="end" fill="#1c6462" font-weight="600">+$4,820</text>
+    <circle cx="44" cy="390" r="11" fill="#fdf3dd"/><circle cx="44" cy="390" r="4" fill="#f2b441"/>
+    <text x="64" y="394" fill="#0b1e1d">Fuel</text><text x="246" y="394" text-anchor="end" fill="#0b1e1d">-$40</text>
+  </g>
+  <!-- budgets glance -->
+  <text x="34" y="436" font-family="'General Sans', system-ui, sans-serif" font-size="13" font-weight="600" fill="#0b1e1d">Budgets</text>
+  <g>
+    <circle cx="66" cy="470" r="16" fill="none" stroke="#dde6e2" stroke-width="5"/><circle cx="66" cy="470" r="16" fill="none" stroke="#0f3d3e" stroke-width="5" stroke-dasharray="70 100" stroke-linecap="round" transform="rotate(-90 66 470)"/>
+    <circle cx="140" cy="470" r="16" fill="none" stroke="#dde6e2" stroke-width="5"/><circle cx="140" cy="470" r="16" fill="none" stroke="#f2b441" stroke-width="5" stroke-dasharray="52 100" stroke-linecap="round" transform="rotate(-90 140 470)"/>
+    <circle cx="214" cy="470" r="16" fill="none" stroke="#dde6e2" stroke-width="5"/><circle cx="214" cy="470" r="16" fill="none" stroke="#58dcae" stroke-width="5" stroke-dasharray="90 100" stroke-linecap="round" transform="rotate(-90 214 470)"/>
+  </g>
+  <!-- tab bar -->
+  <line x1="14" y1="520" x2="266" y2="520" stroke="#dde6e2"/>
+  <g fill="#c6cfcf">
+    <rect x="34" y="536" width="18" height="14" rx="2" fill="#0f3d3e"/>
+    <circle cx="99" cy="543" r="8"/><rect x="134" y="536" width="16" height="14" rx="2"/><path d="M184 550v-8M191 550v-12M198 550v-6" stroke="#c6cfcf" stroke-width="3" stroke-linecap="round"/><circle cx="238" cy="543" r="8"/>
+  </g>
+</svg>

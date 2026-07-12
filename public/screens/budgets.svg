@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 580" role="img" aria-label="Wall it — Budgets screen">
+  <rect x="6" y="6" width="268" height="568" rx="38" fill="#0a2c2d"/>
+  <rect x="14" y="14" width="252" height="552" rx="31" fill="#f5f8f6"/>
+  <rect x="116" y="24" width="48" height="7" rx="3.5" fill="#0a2c2d" opacity="0.22"/>
+  <text x="34" y="70" font-family="'General Sans', system-ui, sans-serif" font-size="20" font-weight="700" fill="#0b1e1d">Budgets</text>
+  <text x="34" y="90" font-family="Inter, sans-serif" font-size="11" fill="#8b9997">50 / 30 / 20 rule · July</text>
+  <!-- bucket split bar -->
+  <g>
+    <rect x="34" y="104" width="106" height="10" rx="5" fill="#0f3d3e"/>
+    <rect x="144" y="104" width="64" height="10" rx="5" fill="#f2b441"/>
+    <rect x="212" y="104" width="34" height="10" rx="5" fill="#58dcae"/>
+    <text x="34" y="132" font-family="Inter, sans-serif" font-size="10" fill="#1c6462">Needs 50%</text>
+    <text x="150" y="132" font-family="Inter, sans-serif" font-size="10" fill="#b5872a">Wants 30%</text>
+    <text x="212" y="132" font-family="Inter, sans-serif" font-size="10" fill="#1c6462">Save 20%</text>
+  </g>
+  <!-- budget card component -->
+  <!-- Groceries -->
+  <rect x="34" y="150" width="212" height="82" rx="16" fill="#ffffff" stroke="#dde6e2"/>
+  <text x="50" y="176" font-family="'General Sans', system-ui, sans-serif" font-size="14" font-weight="600" fill="#0b1e1d">Groceries</text>
+  <rect x="176" y="163" width="56" height="18" rx="9" fill="#eafaf3"/><text x="204" y="176" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#1c6462">+$80 roll</text>
+  <rect x="50" y="192" width="182" height="9" rx="4.5" fill="#eef2f0"/><rect x="50" y="192" width="153" height="9" rx="4.5" fill="#0f3d3e"/>
+  <text x="50" y="221" font-family="Inter, sans-serif" font-size="11" fill="#405754">$420 spent</text><text x="232" y="221" text-anchor="end" font-family="Inter, sans-serif" font-size="11" fill="#8b9997">of $580</text>
+  <!-- Dining -->
+  <rect x="34" y="244" width="212" height="82" rx="16" fill="#ffffff" stroke="#dde6e2"/>
+  <text x="50" y="270" font-family="'General Sans', system-ui, sans-serif" font-size="14" font-weight="600" fill="#0b1e1d">Dining out</text>
+  <rect x="182" y="257" width="50" height="18" rx="9" fill="#fdecec"/><text x="207" y="270" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#c0392b">over $30</text>
+  <rect x="50" y="286" width="182" height="9" rx="4.5" fill="#eef2f0"/><rect x="50" y="286" width="182" height="9" rx="4.5" fill="#f2b441"/>
+  <text x="50" y="315" font-family="Inter, sans-serif" font-size="11" fill="#405754">$180 spent</text><text x="232" y="315" text-anchor="end" font-family="Inter, sans-serif" font-size="11" fill="#8b9997">of $150</text>
+  <!-- Emergency fund -->
+  <rect x="34" y="338" width="212" height="82" rx="16" fill="#ffffff" stroke="#dde6e2"/>
+  <text x="50" y="364" font-family="'General Sans', system-ui, sans-serif" font-size="14" font-weight="600" fill="#0b1e1d">Emergency fund</text>
+  <rect x="184" y="351" width="48" height="18" rx="9" fill="#eafaf3"/><text x="208" y="364" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#1c6462">on track</text>
+  <rect x="50" y="380" width="182" height="9" rx="4.5" fill="#eef2f0"/><rect x="50" y="380" width="182" height="9" rx="4.5" fill="#58dcae"/>
+  <text x="50" y="409" font-family="Inter, sans-serif" font-size="11" fill="#405754">$300 saved</text><text x="232" y="409" text-anchor="end" font-family="Inter, sans-serif" font-size="11" fill="#8b9997">of $300</text>
+  <!-- tab bar -->
+  <line x1="14" y1="520" x2="266" y2="520" stroke="#dde6e2"/>
+  <g fill="#c6cfcf">
+    <rect x="34" y="536" width="18" height="14" rx="2"/>
+    <circle cx="99" cy="543" r="8"/><rect x="132" y="534" width="20" height="18" rx="3" fill="#0f3d3e"/><path d="M184 550v-8M191 550v-12M198 550v-6" stroke="#c6cfcf" stroke-width="3" stroke-linecap="round"/><circle cx="238" cy="543" r="8"/>
+  </g>
+</svg>

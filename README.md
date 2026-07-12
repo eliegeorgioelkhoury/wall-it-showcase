@@ -1,5 +1,6 @@
-# Wall it — case study & web demo
+# Wall it — case study
 
+[![Live](https://img.shields.io/badge/Live-wall--it--showcase.pages.dev-0f3d3e?labelColor=0a2c2d)](https://wall-it-showcase.pages.dev)
 [![CI](https://github.com/eliegeorgioelkhoury/wall-it-showcase/actions/workflows/ci.yml/badge.svg)](https://github.com/eliegeorgioelkhoury/wall-it-showcase/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
@@ -8,15 +9,26 @@
 > achievements live in an on-device SQLite database — no account, no server
 > round-trip for your financial data. Privacy by architecture, not by policy.
 
-This is the **public** presentation for Wall it: a marketing landing page, this
-prose-and-diagrams case study, and a bundled web build of the app. **The app
-source stays private** — only the write-up and the compiled web demo are public.
+### 🔗 [View the live showcase →](https://wall-it-showcase.pages.dev)
 
-- 🔗 **Web demo** — _pending._ The app compiles to the web, but its on-device
-  SQLite (`expo-sqlite` → WASM) needs cross-origin isolation **and** further
-  web adaptation to run in a browser; rather than ship a broken demo, a live
-  build is deferred. Details in [`web-demo/`](web-demo/README.md).
-- 📱 **On the App Store** — _coming soon_
+This is the **public** presentation for Wall it: a landing page and this
+prose-and-diagrams case study. **The app source stays private** — only the
+write-up and screenshots are public.
+
+- 📱 **Native iOS app** — coming to the **App Store** _(soon)_.
+- 🌐 **No web version, by design.** Wall it is genuinely on-device: its database
+  lives in your phone's storage and never leaves it, so there is nothing to run
+  in a browser — that constraint *is* the product. See [Why local-first](#why-local-first).
+
+---
+
+## Screenshots
+
+| Home | Budgets | Achievements |
+|:---:|:---:|:---:|
+| <img src="public/screens/home.svg" alt="Home screen" width="230"> | <img src="public/screens/budgets.svg" alt="Budgets screen" width="230"> | <img src="public/screens/achievements.svg" alt="Achievements screen" width="230"> |
+
+_Representative UI — Wall it is a native iOS app._
 
 ---
 
@@ -244,9 +256,10 @@ This repo is **presentation only** — it contains no application source.
 
 ```mermaid
 flowchart LR
-  P["Private source<br/>React Native + Expo<br/>(wallet-app)"] -->|expo export --platform web| B["Static web bundle"]
-  P -.->|prose + diagrams| C["This case study"]
-  B --> CF["Cloudflare Pages"]
+  P["Private source<br/>React Native + Expo<br/>(wallet-app)"] -.->|prose + diagrams| C["This case study"]
+  P -.->|screenshots| S["UI mockups"]
+  C --> CF["Cloudflare Pages"]
+  S --> CF
   D["Landing page (Astro)"] --> CF
 ```
 
@@ -254,10 +267,9 @@ flowchart LR
   thesis is "your data never leaves your device," with a signature on-device
   **data-orbit** animation and gentle scroll reveals, all honouring
   `prefers-reduced-motion`.
-- **Web demo** — _deferred._ The app exports to a static web bundle via
-  `expo export --platform web`, but it relies on on-device SQLite, which needs
-  browser cross-origin isolation and web-specific shims to actually run. See
-  [`web-demo/`](web-demo/README.md) for the full findings.
+- **No web demo — by design.** Wall it is a native app backed by on-device
+  SQLite; the data never leaves the phone, so there is nothing to run in a
+  browser. The showcase points to screenshots and the App Store instead.
 - **Case study** — this document.
 
 ## Design
@@ -282,10 +294,11 @@ npm run build    # static output -> dist/
 
 ```
 wall-it-showcase/
-├── src/          # Astro landing site (pages, layout, components, styles)
-├── public/       # static assets (self-hosted fonts, favicon)
-├── web-demo/     # bundled Expo web export — build artifact only, no source
-└── docs/         # diagrams / assets for this write-up
+├── src/              # Astro landing site (pages, layout, components, styles)
+├── public/
+│   ├── fonts/        # self-hosted General Sans + Inter
+│   └── screens/      # UI mockups (landing + README screenshots)
+└── .github/          # CI — landing build
 ```
 
 ## License
